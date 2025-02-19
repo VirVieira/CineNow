@@ -1,7 +1,6 @@
 package com.devspacecinenow
 
 import android.util.Log
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -39,21 +38,25 @@ fun MovieDetailScreen(
     ) {
     var movieDto by remember { mutableStateOf<MovieDto?>(null) }
     val apiService = RetrofitClient.retrofitInstance.create(ApiService::class.java)
-    apiService.getMovieById(movieId).enqueue(
-        object : Callback<MovieDto> {
+
+    LaunchedEffect(movieId) {
+        apiService.getMovieById(movieId).enqueue(object : Callback<MovieDto> {
             override fun onResponse(call: Call<MovieDto>, response: Response<MovieDto>) {
                 if (response.isSuccessful) {
-                    movieDto = response.body()
+                    response.body()?.let { movie ->
+                        movieDto = movie // Atualiza o estado corretamente
+                    }
                 } else {
-                    Log.d("MainActivity", "Request Error :: ${response.errorBody()}")
+                    Log.d("MovieDetailScreen", "Erro na requisição :: ${response.errorBody()}")
                 }
             }
 
             override fun onFailure(call: Call<MovieDto>, t: Throwable) {
-                Log.d("MainActivity", "Network Error :: ${t.message}")
+                Log.d("MovieDetailScreen", "Erro na requisição :: ${t.message}")
             }
-        }
-    )
+        })
+    }
+
     movieDto?.let {
         Column(
             modifier = Modifier.fillMaxSize()
@@ -78,6 +81,15 @@ fun MovieDetailScreen(
             MovieDetailContent(it)
         }
     }
+}
+
+private fun <T> Call<T>.enqueue(callback: Callback<MovieDto>) {
+
+}
+
+@Composable
+fun LaunchedEffect(movieId: String, content: () -> Unit) {
+
 }
 
 @Composable

@@ -208,7 +208,6 @@ private fun MovieSession(
         Spacer(modifier = Modifier.size(8.dp))
         MovieList(movieList = movieList, onClick = onClick)
     }
-
 }
 
 @Composable
