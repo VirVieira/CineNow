@@ -1,12 +1,10 @@
-package com.devspacecinenow
+package com.devspacecinenow.list.data
 
 import com.devspacecinenow.common.model.MovieResponse
 import retrofit2.Call
 import retrofit2.http.GET
-import retrofit2.http.Path
-import retrofit2.http.Query
 
-interface ApiService {
+interface ListService {
     @GET("now_playing?language=en-US&page=1")
     fun getNowPlayingMovies() : Call<MovieResponse>
 
@@ -18,10 +16,4 @@ interface ApiService {
 
     @GET("upcoming?language=en-US&page=1")
     fun getUpcomingMovies(): Call<MovieResponse>
-
-    @GET("movie/{movie_id}")
-    fun getMovieById(
-        @Path("movie_id") movieId: String,
-        @Query("language") language: String = "en-US"
-    ): Call<MovieResponse>
 }
