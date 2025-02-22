@@ -8,25 +8,27 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
+import com.devspacecinenow.detail.presentation.MovieDetailViewModel
 import com.devspacecinenow.list.presentation.ui.MovieListViewModel
 import com.devspacecinenow.ui.theme.CineNowTheme
 
 class MainActivity : ComponentActivity() {
 
     private val listViewModel by viewModels<MovieListViewModel> { MovieListViewModel.Factory }
+    private val detailViewModel by viewModels<MovieDetailViewModel> { MovieDetailViewModel.Factory }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             CineNowTheme {
-
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
                     CineNowApp(
-                        listViewModel = listViewModel
+                        listViewModel = listViewModel,
+                        detailViewModel = detailViewModel
                     )
                 }
             }
