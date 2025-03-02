@@ -1,7 +1,6 @@
-package com.devspacecinenow.list.data
+package com.devspacecinenow.list.data.remote
 
-import com.devspacecinenow.common.model.MovieResponse
-import retrofit2.Call
+import com.devspacecinenow.common.remote.model.MovieResponse
 import retrofit2.Response
 import retrofit2.http.GET
 
@@ -10,11 +9,11 @@ interface ListService {
     suspend fun getNowPlayingMovies() : Response<MovieResponse>
 
     @GET("top_rated?language=en-US&page=1")
-    fun getTopRatedMovies() : Call<MovieResponse>
+   suspend fun getTopRatedMovies() : Response<MovieResponse>
 
     @GET("popular?language=en-US&page=1")
-    fun getPopularMovies(): Call<MovieResponse>
+    suspend fun getPopularMovies(): Response<MovieResponse>
 
     @GET("upcoming?language=en-US&page=1")
-    fun getUpcomingMovies(): Call<MovieResponse>
+   suspend fun getUpcomingMovies(): Response<MovieResponse>
 }

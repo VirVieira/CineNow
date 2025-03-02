@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
-import com.devspacecinenow.common.model.MovieDto
+import com.devspacecinenow.common.remote.model.MovieDto
 import com.devspacecinenow.detail.presentation.MovieDetailViewModel
 import com.devspacecinenow.ui.theme.CineNowTheme
 
@@ -34,7 +34,7 @@ fun MovieDetailScreen(
     detailViewModel: MovieDetailViewModel,
 ) {
     val movieDto by detailViewModel.uiMovie.collectAsState()
-    detailViewModel.fetchMoviedetail(movieId)
+    detailViewModel.fetchMovieDetail(movieId)
 
     movieDto?.let {
         Column(
@@ -96,5 +96,4 @@ private fun MovieDetailPreview() {
         )
         MovieDetailContent(movie = movie)
     }
-
 }
