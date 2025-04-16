@@ -2,8 +2,7 @@ package com.devspacecinenow.di
 
 import android.app.Application
 import androidx.room.Room
-import com.devspacecinenow.`common/data`.data.RetrofitClient
-import com.devspacecinenow.`common/data`.local.CineNowDataBase
+import com.devspacecinenow.common.`/data`.CineNowDataBase
 import com.google.android.datatransport.runtime.dagger.Module
 import com.google.android.datatransport.runtime.dagger.Provides
 import dagger.hilt.InstallIn
@@ -28,6 +27,16 @@ class CineNowModule {
     @Provides
     fun providesRetrofitInstance(): Retrofit {
         return RetrofitClient.retrofitInstance
+    }
+
+    class RetrofitClient {
+        companion object {
+            val retrofitInstance: Retrofit
+                get() {
+                    TODO()
+                }
+        }
+
     }
 
     @Provides

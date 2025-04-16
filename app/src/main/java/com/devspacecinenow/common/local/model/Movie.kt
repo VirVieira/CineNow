@@ -1,4 +1,4 @@
-package com.devspacecinenow.`common/data`.model
+package com.devspacecinenow.common.local.model
 
 data class Movie(
     val id: Int,

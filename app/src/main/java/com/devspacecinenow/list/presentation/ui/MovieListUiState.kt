@@ -7,7 +7,7 @@ data class MovieListUiState(
     val errorMessage: String? = "Something went wrong",
 )
 data class MovieUiData(
-    val id: Int,
+    val id: Any,
     val title: String,
     val overview: String,
     val image: String,

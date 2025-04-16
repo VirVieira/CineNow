@@ -1,14 +1,15 @@
 package com.devspacecinenow.list.data.local
 
-import com.devspacecinenow.`common/data`.local.MovieCategory
-import com.devspacecinenow.`common/data`.local.MovieDao
-import com.devspacecinenow.`common/data`.local.MovieEntity
-import com.devspacecinenow.`common/data`.model.Movie
-import javax.inject.Inject
+import com.devspacecinenow.common.local.MovieCategory
+import com.devspacecinenow.common.local.MovieDao
+import com.devspacecinenow.common.local.MovieEntity
+import com.devspacecinenow.common.local.model.Movie
 
-class MovieListLocalDataSource @Inject constructor(
-    private val dao: MovieDao,
+
+class MovieListLocalDataSource(
+    private val dao: MovieDao, override val it: Any,
 ) : LocalDataSource {
+
     override suspend fun getNowPlayingMovies(): List<Movie> {
         return getMoviesByCategory(MovieCategory.NowPlaying)
     }
@@ -24,7 +25,6 @@ class MovieListLocalDataSource @Inject constructor(
     override suspend fun getUpComingMovies(): List<Movie> {
         return getMoviesByCategory(MovieCategory.Upcoming)
     }
-
     override suspend fun updateLocalItems(movies: List<Movie>) {
         val entities = movies.map {
             MovieEntity(
@@ -40,7 +40,6 @@ class MovieListLocalDataSource @Inject constructor(
 
     private suspend fun getMoviesByCategory(movieCategory: MovieCategory): List<Movie> {
         val entities = dao.getMoviesByCategory(movieCategory.name)
-
         return entities.map {
             Movie(
                 id = it.id,

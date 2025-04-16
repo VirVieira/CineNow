@@ -1,15 +1,15 @@
 package com.devspacecinenow.list.data.remote
 
 import android.accounts.NetworkErrorException
-import android.graphics.Movie
 import com.devspacecinenow.common.local.MovieCategory
-import javax.inject.Inject
+import com.devspacecinenow.common.local.model.Movie
 
-class MovieListRemoteDataSource @Inject constructor(
+
+class MovieListRemoteDataSource(
     private val listService: ListService,
-) : RemoteDataSource {
+) {
 
-    override suspend fun getNowPlaying(): Result<List<Movie>?> {
+    suspend fun getNowPlaying(): Result<List<Movie>?> {
         return try {
             val response = listService.getNowPlayingMovies()
             if (response.isSuccessful) {
@@ -18,21 +18,20 @@ class MovieListRemoteDataSource @Inject constructor(
                         id = it.id,
                         title = it.title,
                         overview = it.overview,
-                        image = is.posterFullPath,
+                        image = it.posterFullPath,
                         category = MovieCategory.NowPlaying.name
                     )
                 }
                 Result.success(movies)
             } else {
-                Result.failure((NetworkErrorException(response.message()))
-            }
+                Result.failure((NetworkErrorException(response.message())))            }
         } catch (ex: Exception) {
             ex.printStackTrace()
             Result.failure(ex)
         }
     }
 
-    override suspend fun getTopRated(): Result<List<Movie>?> {
+    suspend fun getTopRated(): Result<List<Movie>?> {
         return try {
             val response = listService.getTopRatedMovies()
             if (response.isSuccessful) {
@@ -55,7 +54,7 @@ class MovieListRemoteDataSource @Inject constructor(
         }
     }
 
-    override suspend fun getPopular(): Result<List<Movie>?> {
+    suspend fun getPopular(): Result<List<Movie>?> {
         return try {
             val response = listService.getPopularMovies()
             if (response.isSuccessful) {
@@ -78,7 +77,7 @@ class MovieListRemoteDataSource @Inject constructor(
         }
     }
 
-    override suspend fun getUpcoming(): Result<List<Movie>?> {
+    suspend fun getUpcoming(): Result<List<Movie>?> {
         return try {
             val response = listService.getUpcomingMovies()
             if (response.isSuccessful) {

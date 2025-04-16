@@ -9,7 +9,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import com.devspacecinenow.detail.presentation.MovieDetailViewModel
-import com.devspacecinenow.list.presentation.ui.MovieListViewModel
+import com.devspacecinenow.list.presentation.MovieListViewModel
 import com.devspacecinenow.ui.theme.CineNowTheme
 
 class MainActivity : ComponentActivity() {

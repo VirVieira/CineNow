@@ -13,7 +13,7 @@ import retrofit2.Retrofit
 
 
 @Module
-@InstallIn(viewModelComponent::class)
+@InstallIn
 class MovieListModule {
 
     @Provides
@@ -22,10 +22,10 @@ class MovieListModule {
     }
 }
 @Module
-@InstallIn(viewModelComponent::class)
+@InstallIn
 interface MovieListModuleBinding {
     @Binds
-    fun bindLocalDataSource(impl:MovieListLocalDataSource): LocalDataSource
+    fun bindLocalDataSource(impl:MovieListLocalDataSource<Any?>): LocalDataSource
 
     @Binds
     fun bindRemoteDataSource(impl: MovieListRemoteDataSource): RemoteDataSource

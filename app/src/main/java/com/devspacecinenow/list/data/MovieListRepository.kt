@@ -1,12 +1,14 @@
 package com.devspacecinenow.list.data
 
-import com.devspacecinenow.list.data.local.LocalDataSource
-import com.devspacecinenow.list.data.remote.RemoteDataSource
+import com.devspacecinenow.common.local.model.Movie
+import com.devspacecinenow.detail.data.remote.model.MovieResponse
+import com.devspacecinenow.list.data.local.MovieListLocalDataSource
+import com.devspacecinenow.list.data.remote.MovieListRemoteDataSource
 import javax.inject.Inject
 
 class MovieListRepository @Inject constructor(
-    private val local: LocalDataSource,
-    private val remote: RemoteDataSource,
+    private val local: MovieListLocalDataSource,
+    private val remote: MovieListRemoteDataSource,
 ) {
     suspend fun getNowPlaying(): Result<List<Movie>?> {
         return try {
@@ -17,10 +19,10 @@ class MovieListRepository @Inject constructor(
                     local.updateLocalItems(moviesRemote)
                 }
                 // Source of Truth
-                return Result.success(local.getNowPlayingMovies())
+                Result.success(local.getNowPlayingMovies())
             } else {
                 val localData = local.getNowPlayingMovies()
-                if (localData.isNotEmpty()) {
+                if (localData.isEmpty()) {
                     return result
                 } else {
                     Result.success(localData)
@@ -41,10 +43,10 @@ class MovieListRepository @Inject constructor(
                     local.updateLocalItems(moviesRemote)
                 }
                 // Source of Truth
-                return Result.success(local.getTopRatedMovies())
+                Result.success(local.getTopRatedMovies())
             } else {
-                val localData = local.getTopRatedMovies())
-                if (localData.isNotEmpty()) {
+                val localData = local.getTopRatedMovies()
+                if (localData.isEmpty()) {
                     return result
                 } else {
                     Result.success(localData)
@@ -65,7 +67,7 @@ class MovieListRepository @Inject constructor(
                     local.updateLocalItems(moviesRemote)
                 }
                 // Source of Truth
-                return Result.success(local.getPopularMovies())
+                Result.success(local.getPopularMovies())
             } else {
                 val localData = local.getPopularMovies()
                 if (localData.isEmpty()) {
@@ -84,12 +86,12 @@ class MovieListRepository @Inject constructor(
         return try {
             val result = remote.getUpcoming()
             if (result.isSuccess) {
-                val movieRemote = result.getOrNull() ?: emptyList()
-                if (movieRemote.isNotEmpty()) {
-                    local.updateLocalItems(movieRemote)
+                val moviesRemote = result.getOrNull() ?: emptyList()
+                if (moviesRemote.isNotEmpty()) {
+                    local.updateLocalItems(moviesRemote)
                 }
                 // Source of Truth
-                return Result.success(local.getUpComingMovies())
+                Result.success(local.getUpComingMovies())
             } else {
                 val localData = local.getUpComingMovies()
                 if (localData.isEmpty()) {

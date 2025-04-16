@@ -1,6 +1,6 @@
 package com.devspacecinenow.list.data.remote
 
-import com.devspacecinenow.`common/data`.model.Movie
+import com.devspacecinenow.common.local.model.Movie
 
 interface RemoteDataSource {
     suspend fun getNowPlaying(): Result<List<Movie>?>
