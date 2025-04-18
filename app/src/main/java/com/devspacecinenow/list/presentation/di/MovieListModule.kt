@@ -5,12 +5,11 @@ import com.devspacecinenow.list.data.local.LocalDataSource
 import com.devspacecinenow.list.data.local.MovieListLocalDataSource
 import com.devspacecinenow.list.data.remote.MovieListRemoteDataSource
 import com.devspacecinenow.list.data.remote.RemoteDataSource
-import com.google.android.datatransport.runtime.dagger.Binds
-import com.google.android.datatransport.runtime.dagger.Module
-import com.google.android.datatransport.runtime.dagger.Provides
+import dagger.Binds
+import dagger.Module
+import dagger.Provides
 import dagger.hilt.InstallIn
 import retrofit2.Retrofit
-
 
 @Module
 @InstallIn

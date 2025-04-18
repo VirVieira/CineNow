@@ -15,5 +15,4 @@ class MovieDetailModule {
     fun provideMovieDetailService(retrofit: Retrofit): DetailService {
         return retrofit.create(DetailService::class.java)
     }
-
 }

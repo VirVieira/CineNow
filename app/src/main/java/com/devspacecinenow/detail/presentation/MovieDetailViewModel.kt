@@ -14,9 +14,10 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @HiltViewModel
-class MovieDetailViewModel(
+class MovieDetailViewModel @Inject constructor(
     private val detailService: DetailService
 ) : ViewModel() {
 
@@ -37,26 +38,6 @@ class MovieDetailViewModel(
                 }
             }
 
-        }
-    }
-
-    fun cleanMovieID() {
-        viewModelScope.launch {
-            delay(1000)
-            _uiMovie.value = null
-        }
-    }
-
-    companion object {
-        val Factory: ViewModelProvider.Factory = object : ViewModelProvider.Factory {
-            @Suppress("UNCHECKED_CAST")
-            override fun <T : ViewModel> create(modelClass: Class<T>, extras: CreationExtras): T {
-                val detailService =
-                    CineNowModule.RetrofitClient.retrofitInstance.create(DetailService::class.java)
-                return MovieDetailViewModel(
-                    detailService
-                ) as T
-            }
         }
     }
 }

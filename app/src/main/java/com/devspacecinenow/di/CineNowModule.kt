@@ -2,7 +2,7 @@ package com.devspacecinenow.di
 
 import android.app.Application
 import androidx.room.Room
-import com.devspacecinenow.common.`/data`.CineNowDataBase
+import com.devspacecinenow.common.data.CineNowDataBase
 import com.google.android.datatransport.runtime.dagger.Module
 import com.google.android.datatransport.runtime.dagger.Provides
 import dagger.hilt.InstallIn
@@ -10,7 +10,6 @@ import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import retrofit2.Retrofit
-
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -36,7 +35,6 @@ class CineNowModule {
                     TODO()
                 }
         }
-
     }
 
     @Provides

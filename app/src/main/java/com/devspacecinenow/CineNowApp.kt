@@ -1,6 +1,6 @@
 package com.devspacecinenow
 
-import androidx.compose.runtime.Composable
+    import androidx.compose.runtime.Composable
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -11,7 +11,7 @@ import com.devspacecinenow.list.presentation.MovieListViewModel
 import com.devspacecinenow.list.presentation.ui.MovieListScreen
 
 @Composable
-fun CineNowApp(listViewModel: MovieListViewModel, detailViewModel: MovieDetailViewModel) {
+fun CineNowApp() {
     val navController = rememberNavController()
     NavHost(
         navController = navController,

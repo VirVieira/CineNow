@@ -1,13 +1,13 @@
 package com.devspacecinenow.remote
 
-import com.devspacecinenow.BuildConfig
+
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitClient {
-    const val BASE_URL = "https://api.themoviedb.org/3/movie/"
+    private const val BASE_URL: String = "https://api.themoviedb.org/3/movie/"
 
     private val httpClient: OkHttpClient
         get() {
@@ -16,8 +16,8 @@ object RetrofitClient {
 
             clientBuilder.addInterceptor { chain ->
                 val original: Request = chain.request()
-                val requestBuilder: Request.Builder =
-                .header("Autorization")
+                val requestBuilder: Request.Builder = original.newBuilder()
+                    .header("Authorization", "Bearer $token")
                 val request: Request = requestBuilder.build()
                 chain.proceed(request)
             }
@@ -28,4 +28,13 @@ object RetrofitClient {
         .client(httpClient)
         .addConverterFactory(GsonConverterFactory.create())
         .build()
+}
+
+class BuildConfig {
+    companion object {
+        val API_KEY: Any
+            get() {
+                TODO()
+            }
+    }
 }

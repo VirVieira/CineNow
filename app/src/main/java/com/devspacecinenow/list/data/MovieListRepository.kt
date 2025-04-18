@@ -1,14 +1,13 @@
 package com.devspacecinenow.list.data
 
 import com.devspacecinenow.common.local.model.Movie
-import com.devspacecinenow.detail.data.remote.model.MovieResponse
-import com.devspacecinenow.list.data.local.MovieListLocalDataSource
-import com.devspacecinenow.list.data.remote.MovieListRemoteDataSource
+import com.devspacecinenow.list.data.local.LocalDataSource
+import com.devspacecinenow.list.data.remote.RemoteDataSource
 import javax.inject.Inject
 
 class MovieListRepository @Inject constructor(
-    private val local: MovieListLocalDataSource,
-    private val remote: MovieListRemoteDataSource,
+    private val local: LocalDataSource,
+    private val remote: RemoteDataSource,
 ) {
     suspend fun getNowPlaying(): Result<List<Movie>?> {
         return try {

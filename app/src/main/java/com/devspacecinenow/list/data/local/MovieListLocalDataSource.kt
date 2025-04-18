@@ -6,8 +6,9 @@ import com.devspacecinenow.common.local.MovieEntity
 import com.devspacecinenow.common.local.model.Movie
 
 
-class MovieListLocalDataSource(
-    private val dao: MovieDao, override val it: Any,
+class MovieListLocalDataSource<T>(
+    private val dao: MovieDao,
+    override val it: Any
 ) : LocalDataSource {
 
     override suspend fun getNowPlayingMovies(): List<Movie> {
